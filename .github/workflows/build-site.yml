@@ -7,14 +7,10 @@ on:
     branches: [ latest, latest-dev, archive ]
 
 jobs:
-  build:
-    # Main workflow job that builds, tests, etc.
-
   dispatch:
-    needs: build
     strategy:
       matrix:
-        repo: ['JakeSCahill/docs-poc']
+        repo: ['Actions-tester-jake/docs-poc']
     runs-on: ubuntu-latest
     steps:
       - name: Repository Dispatch
@@ -23,3 +19,4 @@ jobs:
           token: ${{ secrets.REPO_ACCESS_TOKEN }}
           repository: ${{ matrix.repo }}
           event-type: build-site
+      - run: echo "Sent build event" 
